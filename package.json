@@ -1,0 +1,24 @@
+{
+  "name": "reviewsAPI",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yukiyamamoto710/reviewsAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yukiyamamoto710/reviewsAPI/issues"
+  },
+  "homepage": "https://github.com/yukiyamamoto710/reviewsAPI#readme",
+  "dependencies": {
+    "fast-csv": "^4.3.6",
+    "pg": "^8.6.0"
+  }
+}
