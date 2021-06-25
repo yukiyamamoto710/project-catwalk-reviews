@@ -1,6 +1,7 @@
 const express = require('express');
 const reviews = require('../../helpers/reviewsAPI.js');
 const router = express.Router();
+const getAllReviews = require('../models/getAllReviews');
 
 router.get('/reviews/meta', (req, res) => {
   const { product_id } = req.params;

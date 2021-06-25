@@ -11,7 +11,7 @@ CREATE TABLE review (
  reported BOOLEAN DEFAULT 'false',
  reviewer_name VARCHAR(60),
  reviewer_email VARCHAR(60),
- response VARCHAR,
+ response VARCHAR DEFAULT NULL,
  helpfulness SMALLINT DEFAULT 0
 );
 ALTER TABLE review ADD CONSTRAINT review_pkey PRIMARY KEY (id);

@@ -1,14 +1,20 @@
 const db = require('../database/index.js');
 
 const getReviewMeta = (product_id, callback) => {
-  let queryReview = `SELECT id, rating, recommend FROM review WHERE product_id=${product_id}`;
-  let queryCharacteristics = `SELECT id, name FROM characteristics WHERE product_id=${product_id}`;
+  let queryReview =
+    `SELECT id, rating, recommend
+      FROM review
+      WHERE product_id=${product_id}`;
+  let queryCharacteristics =
+    `SELECT id, name
+      FROM characteristics
+      WHERE product_id=${product_id}`;
 
   db.query(queryCharacteristics)
   .then((res) => {
     let characteristics = [];
     for (let i = 0; i < res.rows.length; i++) {
-      characteristics.push({[res.rows[i].name]: {id: res.rows[i].id}})
+      characteristics.push([[res.rows[i].name], {id: res.rows[i].id}])
     }
     db.query(queryReview)
     .then(res => {
@@ -20,13 +26,12 @@ const getReviewMeta = (product_id, callback) => {
       return Promise.all(promises);
     })
     .then((res) => {
-      let idx = 0;
-      res.map(value => {
-        value[idx]
+      const values = getAverage(res);
+      characteristics.map((char, i) => {
+        return {}.char[0] = Object.assign(char[1], values[i])
       })
-        console.log(res);
-        // console.log(res2.rows)
-      })
+      console.log(characteristics);
+    })
     .catch(err => callback(err))
   })
 
@@ -42,16 +47,17 @@ const getValues = (review_id) => {
   .catch(err => callback(err));
 }
 
-// array of arrays
-//
-
 const getAverage = (res) => {
+  let results = [];
   let idx = 0;
-  while (idx < res.length) {
-    for (var i = 0; i < res[0].length; i++) {
-      
-    }
+  while (idx < res[0].length) {
+    let total = 0;
+    for (var i = 0; i < res.length; i++) {
+       total += Number(res[i][idx]);
+     }
+    let ave = total/(res.length);
+    results.push({value: ave});
+    idx++;
   }
+ return results;
 }
-
-getReviewMeta(25812, ()=>{});

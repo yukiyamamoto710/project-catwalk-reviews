@@ -33,9 +33,10 @@ const getAllReviews = (params, callback) => {
     })
     return Promise.all(promises);
   })
-  .then((res) => {
-    let results = renderList(params.product_id, res, params.page=1, limit)
-    console.log(results);
+  .then(res => {
+    let results = renderList(params.product_id, res, params.page=1, limit);
+    console.log(JSON.stringify(results));
+    callback(null, JSON.stringify(results));
   })
   .catch(err => callback(err))
 }
@@ -45,7 +46,9 @@ const queryPhotos = (review) => {
   .then(res => {
     return renderReview(review, res.rows);
   })
-  .catch((err) => console.log(err))
+  .catch(err => {
+    throw err;
+  })
 }
 
 const params = {
@@ -54,4 +57,4 @@ const params = {
   count: 2,
   page: 2
 }
-getAllReviews(params);
+getAllReviews(params, ()=>{});
