@@ -1,4 +1,5 @@
 const db = require('../database/index.js');
+const renderMeta = require('../helpers/renderMeta.js');
 
 const getReviewMeta = (product_id, callback) => {
   let queryReview =
@@ -10,14 +11,17 @@ const getReviewMeta = (product_id, callback) => {
       FROM characteristics
       WHERE product_id=${product_id}`;
 
+  let results = {};
+
   db.query(queryCharacteristics)
   .then((res) => {
     let characteristics = [];
     for (let i = 0; i < res.rows.length; i++) {
-      characteristics.push([[res.rows[i].name], {id: res.rows[i].id}])
+      characteristics.push([res.rows[i].name, {id: res.rows[i].id}])
     }
     db.query(queryReview)
     .then(res => {
+      results = renderMeta(product_id, res.rows);
       let promises = [];
       const review_ids = res.rows.map(row => row.id);
       review_ids.forEach(review_id => {
@@ -28,13 +32,18 @@ const getReviewMeta = (product_id, callback) => {
     .then((res) => {
       const values = getAverage(res);
       characteristics.map((char, i) => {
-        return {}.char[0] = Object.assign(char[1], values[i])
+        let obj = {};
+        return obj[char[0]] = Object.assign(char[1], values[i])
       })
-      console.log(characteristics);
+      const renderedChar = {};
+      characteristics.forEach(char => {
+        renderedChar[char[0]] = char[1];
+      })
+      results = (Object.assign(results, {characteristics: renderedChar}));
+      callback(null, JSON.stringify(results));
     })
     .catch(err => callback(err))
   })
-
 }
 
 const getValues = (review_id) => {
@@ -61,3 +70,5 @@ const getAverage = (res) => {
   }
  return results;
 }
+
+// getReviewMeta(25811, ()=>{})

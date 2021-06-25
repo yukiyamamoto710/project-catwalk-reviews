@@ -35,7 +35,7 @@ const getAllReviews = (params, callback) => {
   })
   .then(res => {
     let results = renderList(params.product_id, res, params.page=1, limit);
-    console.log(JSON.stringify(results));
+    console.log(results)
     callback(null, JSON.stringify(results));
   })
   .catch(err => callback(err))
@@ -58,3 +58,5 @@ const params = {
   page: 2
 }
 getAllReviews(params, ()=>{});
+
+module.exports = getAllReviews;

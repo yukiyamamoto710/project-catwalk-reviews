@@ -1,11 +1,11 @@
 const express = require('express');
 const reviews = require('../../helpers/reviewsAPI.js');
 const router = express.Router();
-const getAllReviews = require('../models/getAllReviews');
+const models = require('../models.index.js');
 
 router.get('/reviews/meta', (req, res) => {
   const { product_id } = req.params;
-  getReviewMeta(product_id, (err, res) => {
+  models.getReviewMeta(product_id, (err, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -15,7 +15,7 @@ router.get('/reviews/meta', (req, res) => {
 })
 
 router.get('/reviews', (req, res) => {
-  getAllReviews(req.params, (err, res) => {
+  models.getAllReviews(req.params, (err, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -24,15 +24,28 @@ router.get('/reviews', (req, res) => {
   })
 })
 
-router.put('/reviews', (req, res) => {
-  postReview(req.body, (err, res) => {
+router.put('/reviews/:review_id/helpful', (req, res) => {
+  const { review_id } = req.params;
+  models.markHelpful(review_id, (err, res) => {
     if (err) {
-      res.status(400).send(err);
+      res.status(404).send(err);
     } else {
-      res.status(201).send(res);
+      res.sendStatus(204);
     }
   })
 })
+
+router.put('/reviews/:review_id/report', (req, res) => {
+  const { review_id } = req.params;
+  models.reportReview(review_id, (err, res) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      res.sendStatus(204);
+    }
+  })
+})
+
 router.post('/createReview')
 
 
