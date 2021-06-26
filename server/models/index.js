@@ -7,7 +7,7 @@ const reportReview = require('./reportReview.js');
 const models = {
   getAllReviews: getAllReviews,
   getReviewMeta: getReviewMeta,
-  postReview: posttReview,
+  postReview: postReview,
   markHelpful: markHelpful,
   reportReview: reportReview
 }

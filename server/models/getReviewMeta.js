@@ -44,7 +44,7 @@ const getReviewMeta = (product_id, callback) => {
     })
     .catch(err => callback(err))
   })
-}
+};
 
 const getValues = (review_id) => {
   let queryValues = `SELECT value FROM characteristic_reviews WHERE review_id=${review_id};`
@@ -54,7 +54,7 @@ const getValues = (review_id) => {
     return values;
   })
   .catch(err => callback(err));
-}
+};
 
 const getAverage = (res) => {
   let results = [];
@@ -69,6 +69,6 @@ const getAverage = (res) => {
     idx++;
   }
  return results;
-}
+};
 
-// getReviewMeta(25811, ()=>{})
+module.exports = getReviewMeta;

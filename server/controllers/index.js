@@ -1,7 +1,6 @@
 const express = require('express');
-const reviews = require('../../helpers/reviewsAPI.js');
 const router = express.Router();
-const models = require('../models.index.js');
+const models = require('../models/index.js');
 
 router.get('/reviews/meta', (req, res) => {
   const { product_id } = req.params;
@@ -15,11 +14,12 @@ router.get('/reviews/meta', (req, res) => {
 })
 
 router.get('/reviews', (req, res) => {
+  console.log('is this invoked?')
   models.getAllReviews(req.params, (err, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      res.status(200).send(res);
+      res.status(200).send('hello');
     }
   })
 })

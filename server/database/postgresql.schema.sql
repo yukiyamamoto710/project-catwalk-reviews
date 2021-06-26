@@ -38,7 +38,7 @@ CREATE TABLE characteristic_reviews (
  id BIGSERIAL,
  characteristic_id INTEGER,
  review_id INTEGER,
- value DECIMAL
+ value SMALLINT,
 );
 ALTER TABLE characteristic_reviews ADD CONSTRAINT characteristic_reviews_pkey PRIMARY KEY (id);
 
