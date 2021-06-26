@@ -6,12 +6,13 @@ const models = require('./models/index.js');
 app.use(express.json());
 
 app.get('/reviews/meta', (req, res) => {
-  const { product_id } = req.params;
-  models.getReviewMeta(product_id, (err, res) => {
+  const { product_id } = req.query;
+  console.log(product_id)
+  models.getReviewMeta(product_id, (err, data) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      res.status(200).send(res);
+      res.status(200).send(data);
     }
   })
 })
@@ -28,7 +29,7 @@ app.get('/reviews', (req, res) => {
 
 app.put('/reviews/:review_id/helpful', (req, res) => {
   const { review_id } = req.params;
-  models.markHelpful(review_id, (err, res) => {
+  models.markHelpful(review_id, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
@@ -39,7 +40,7 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 
 app.put('/reviews/:review_id/report', (req, res) => {
   const { review_id } = req.params;
-  models.reportReview(review_id, (err, res) => {
+  models.reportReview(review_id, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {

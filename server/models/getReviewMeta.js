@@ -40,6 +40,7 @@ const getReviewMeta = (product_id, callback) => {
         renderedChar[char[0]] = char[1];
       })
       results = (Object.assign(results, {characteristics: renderedChar}));
+      console.log(results);
       callback(null, JSON.stringify(results));
     })
     .catch(err => callback(err))

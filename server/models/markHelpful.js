@@ -5,7 +5,7 @@ const markHelpful = (review_id, callback) => {
     `UPDATE review
       SET helpfulness = helpfulness + 1
       WHERE id=${review_id}`;
-      
+
   db.query(queryUpdate)
   .then(res => {
     callback(null, res);
