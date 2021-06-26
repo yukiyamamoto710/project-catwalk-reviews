@@ -19,7 +19,6 @@ const postReview = (data, callback) => {
       photos.forEach(photo => {
         console.log(photo);
         var queryPhotos = `INSERT INTO photos (id, review_id, url) VALUES (nextval('photos_id_sequence'), ${review_id}, ${photo}) RETURNING id AS photos_id`;
-        console.log(queryPhotos);
         db.query(queryPhotos)
         .then(res => {
           console.log(res.rows);
@@ -33,13 +32,12 @@ const postReview = (data, callback) => {
   .then(res => {
     characteristic_ids.forEach((char, i) => {
       var queryCharacteristics = `INSERT INTO characteristic_reviews (id, characteristic_id, review_id, value) VALUES (nextval('characteristic_reviews_id_sequence'), ${char}, ${review_id}, ${values[i]}) RETURNING id`;
-      console.log(queryCharacteristics)
       db.query(queryCharacteristics)
       .then(res => {
-        console.log(res.rows);
+        callback(null, res.rows);
       })
       .catch(err => {
-        console.log(err);
+        callback(err);
       })
     })
   })
@@ -49,17 +47,3 @@ const postReview = (data, callback) => {
 }
 
 module.exports = postReview;
-
-var data = {
-  product_id: 25811,
-  rating: 5,
-  summary: "Aliquid omnis aut.",
-  body: "Reiciendis ipsum dolor et. Quam tempora officia unde impedit. Corrupti quia repudiandae non.",
-  recommend: true,
-  name: "yuki",
-  email: "helloworld@gmail.com",
-  photos: [],
-  characteristics: {"14": 5, "15": 5}
-};
-
-postReview(data, ()=>{})
