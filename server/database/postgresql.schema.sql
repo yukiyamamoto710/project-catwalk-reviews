@@ -1,7 +1,7 @@
 CREATE DATABASE reviews;
 
 CREATE TABLE review (
- id BIGSERIAL,
+ id SERIAL PRIMARY KEY,
  product_id INTEGER,
  rating SMALLINT DEFAULT 0,
  date BIGINT,
@@ -14,34 +14,26 @@ CREATE TABLE review (
  response VARCHAR DEFAULT NULL,
  helpfulness SMALLINT DEFAULT 0
 );
-ALTER TABLE review ADD CONSTRAINT review_pkey PRIMARY KEY (id);
-
 
 CREATE TABLE photos (
- id BIGSERIAL,
+ id SERIAL PRIMARY KEY,
  review_id INTEGER,
  url VARCHAR
 );
-ALTER TABLE photos ADD CONSTRAINT photos_pkey PRIMARY KEY (id);
-
 
 CREATE TYPE features AS ENUM ('Size', 'Width', 'Comfort', 'Quality', 'Length', 'Fit');
 CREATE TABLE characteristics (
- id BIGSERIAL,
+ id SERIAL PRIMARY KEY,
  product_id INTEGER,
  name features
 );
-ALTER TABLE characteristics ADD CONSTRAINT characteristics_pkey PRIMARY KEY (id);
-
 
 CREATE TABLE characteristic_reviews (
- id BIGSERIAL,
+ id SERIAL PRIMARY KEY,
  characteristic_id INTEGER,
  review_id INTEGER,
- value SMALLINT,
+ value SMALLINT
 );
-ALTER TABLE characteristic_reviews ADD CONSTRAINT characteristic_reviews_pkey PRIMARY KEY (id);
-
 
 ALTER TABLE photos ADD CONSTRAINT photos_review_id_fkey FOREIGN KEY (review_id) REFERENCES review(id);
 ALTER TABLE characteristic_reviews ADD CONSTRAINT characteristic_reviews_characteristic_id_fkey FOREIGN KEY (characteristic_id) REFERENCES characteristics(id);
