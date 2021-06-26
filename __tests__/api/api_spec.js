@@ -16,7 +16,8 @@ it ('should return a status of 200 for getting revie metadata', function() {
 it ('should post a review and return a status of 201', function() {
   return frisby
     .post(`${server}/reviews`, {
-      product: 25811,
+      body: {
+      product_id: 25811,
       rating: 5,
       summary: "Aliquid omnis aut.",
       body: "Reiciendis ipsum dolor et. Quam tempora officia unde impedit. Corrupti quia repudiandae non.",
@@ -25,6 +26,7 @@ it ('should post a review and return a status of 201', function() {
       email: "helloworld@gmail.com",
       photos: [],
       characteristics: {"14": 5, "15": 5}
+      }
     })
     .expect('status', 201)
 });

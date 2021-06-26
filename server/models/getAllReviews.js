@@ -3,52 +3,39 @@ const renderReview = require('../helpers/renderReview.js');
 const renderList = require('../helpers/renderList.js');
 
 const getAllReviews = (params, callback) => {
-  let sort = 'id';
+  let sort = 'review.id';
   if (params.sort === 'newest') {
     sort = 'date';
   } else if (params.sort === 'helpfulness') {
     sort = 'helpfulness'
   }
-
-  let limit = 5;
-  let row_skip = null;
-  if (params.count) {
-    limit = params.count
-  }
-  if (params.page && params.page > 1) {
-    row_skip = limit * (params.page - 1)
-  }
+  let limit = params.count || 5;
 
   let reviewQuery =
-    `SELECT * FROM review
+    `SELECT review.*, photos.id AS photo_id, photos.url FROM review
+      INNER JOIN photos
+      ON review.id = photos.review_id
       WHERE product_id=${params.product_id}
-      ORDER BY ${sort} DESC
-      LIMIT ${limit} OFFSET ${row_skip}`;
+      ORDER BY ${sort} DESC`;
 
   db.query(reviewQuery)
   .then(res => {
-    let promises = [];
-    res.rows.forEach(review => {
-      promises.push(queryPhotos(review))
+    let reviews = res.rows;
+    let results = {};
+    reviews.map(review => {
+      if (!results[review.id]) {
+        results[review.id] = renderReview(review);
+      } else {
+        let photo = {id: review.photo_id, url: review.url};
+        results[review.id].photos.push(photo);
+      }
     })
-    return Promise.all(promises);
-  })
-  .then(res => {
-    let results = renderList(params.product_id, res, params.page=1, limit);
-    callback(null, JSON.stringify(results));
+    let combined = Object.values(results);
+    let response = renderList(params.product_id, combined, params.page=0, limit);
+    callback(null, JSON.stringify(response));
   })
   .catch(err => {
     callback(err);
-  })
-}
-
-const queryPhotos = (review) => {
-  return db.query(`SELECT * FROM photos WHERE review_id=${review.id}`)
-  .then(res => {
-    return renderReview(review, res.rows=[]);
-  })
-  .catch(err => {
-    console.log(err);
   })
 }
 
