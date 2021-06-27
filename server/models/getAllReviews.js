@@ -15,7 +15,8 @@ const getAllReviews = (params, callback) => {
     `SELECT review.*, photos.id AS photo_id, photos.url FROM review
       INNER JOIN photos
       ON review.id = photos.review_id
-      WHERE product_id=${params.product_id}
+      WHERE product_id = ${params.product_id}
+      AND reported = false
       ORDER BY ${sort} DESC`;
 
   db.query(reviewQuery)
