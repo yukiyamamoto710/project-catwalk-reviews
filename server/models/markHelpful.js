@@ -1,7 +1,7 @@
 const db = require('../database/index.js');
 
 const markHelpful = (review_id, callback) => {
-  const queryUpdate =
+  let queryUpdate =
     `UPDATE review
       SET helpfulness = helpfulness + 1
       WHERE id=${review_id}`;

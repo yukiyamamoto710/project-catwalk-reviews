@@ -1,11 +1,11 @@
 const db = require('../database/index.js');
 
 const reportReview = (review_id, callback) => {
-  const queryUpdate =
+  let queryUpdate =
     `UPDATE review
       SET reported = true
       WHERE id=${review_id}`;
-      
+
   db.query(queryUpdate)
   .then(res => {
     callback(null, res);
