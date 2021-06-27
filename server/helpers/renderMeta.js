@@ -1,7 +1,5 @@
-const renderMeta = (product_id, res) => {
+const renderMeta = (res) => {
   let results = {};
-  results.product_id = product_id;
-
   const ratings = {};
   res.forEach(row => {
     if (ratings[row.rating]) {

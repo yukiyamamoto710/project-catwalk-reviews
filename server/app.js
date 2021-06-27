@@ -9,7 +9,7 @@ app.get('/reviews/meta', (req, res) => {
   const { product_id } = req.query;
   models.getReviewMeta(product_id, (err, data) => {
     if (err) {
-      res.status(400).send(err);
+      res.status(404).send(err);
     } else {
       res.status(200).send(data);
     }
@@ -19,7 +19,7 @@ app.get('/reviews/meta', (req, res) => {
 app.get('/reviews', (req, res) => {
   models.getAllReviews(req.query, (err, data) => {
     if (err) {
-      res.status(400).send(err);
+      res.status(404).send(err);
     } else {
       res.status(200).send(data);
     }

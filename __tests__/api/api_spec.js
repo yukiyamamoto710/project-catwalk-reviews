@@ -9,7 +9,7 @@ it ('should return a status of 200 for getting a list of reviews', function() {
 
 it ('should return a status of 200 for getting revie metadata', function() {
   return frisby
-    .get(`${server}/reviews/meta`)
+    .get(`${server}/reviews/meta?product_id=25811`)
     .expect('status', 200)
 });
 

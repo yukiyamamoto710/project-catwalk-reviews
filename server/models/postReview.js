@@ -10,14 +10,11 @@ const postReview = (data, callback) => {
   var queryReview = `INSERT INTO review (id, product_id, rating, summary, body, recommend, reviewer_name, reviewer_email)
   VALUES (nextval('review_id_sequence'), ${product_id}, ${rating}, '${summary}', '${body}', ${recommend}, '${name}', '${email}') RETURNING id AS review_id`;
 
-  console.log(queryReview);
-
   db.query(queryReview)
   .then(res => {
     review_id = res.rows[0].review_id;
     if (photos.length) {
       photos.forEach(photo => {
-        console.log(photo);
         var queryPhotos = `INSERT INTO photos (id, review_id, url) VALUES (nextval('photos_id_sequence'), ${review_id}, ${photo}) RETURNING id AS photos_id`;
         db.query(queryPhotos)
         .then(res => {
