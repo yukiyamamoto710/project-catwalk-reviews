@@ -1,14 +1,13 @@
-const Pool = require('pg').Pool;
+const { Pool } = require('pg');
 
 const pool = new Pool({
   host: 'localhost',
   user: '',
-  database: "reviews",
+  database: 'reviews',
   password: '',
-  port: 5432
+  port: 5432,
 });
 
 pool.connect();
 
 module.exports = pool;
-

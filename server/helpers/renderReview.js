@@ -1,4 +1,5 @@
-const renderReview= (review) => {
+/* eslint-disable no-param-reassign */
+const renderReview = (review) => {
   review.review_id = review.id;
   delete review.id;
   delete review.product_id;
@@ -7,10 +8,10 @@ const renderReview= (review) => {
   if (review.response === 'null') {
     review.response = null;
   }
-  review.photos = [{id: review.photo_id, url: review.url}];
+  review.photos = [{ id: review.photo_id, url: review.url }];
   delete review.photo_id;
   delete review.url;
   return review;
-}
+};
 
 module.exports = renderReview;

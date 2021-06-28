@@ -1,15 +1,15 @@
-const getAllReviews = require('./getAllReviews.js');
-const getReviewMeta = require('./getReviewMeta.js');
-const postReview = require('./postReview.js');
-const markHelpful = require('./markHelpful.js');
-const reportReview = require('./reportReview.js');
+const getAllReviews = require('./getAllReviews');
+const getReviewMeta = require('./getReviewMeta');
+const postReview = require('./postReview');
+const markHelpful = require('./markHelpful');
+const reportReview = require('./reportReview');
 
 const models = {
-  getAllReviews: getAllReviews,
-  getReviewMeta: getReviewMeta,
-  postReview: postReview,
-  markHelpful: markHelpful,
-  reportReview: reportReview
-}
+  getAllReviews,
+  getReviewMeta,
+  postReview,
+  markHelpful,
+  reportReview,
+};
 
 module.exports = models;
