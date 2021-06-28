@@ -1,4 +1,4 @@
-\COPY review (id, product_id,rating,date,summary,body,recommend,reported,reviewer_name,reviewer_email,response,helpfulness) FROM '/Users/yukiyamamoto/Documents/Immersive/reviewsAPI/raw-data/reviews.csv' DELIMITER ',' CSV HEADER;
+\COPY review2 (id, product_id,rating,date,summary,body,recommend,reported,reviewer_name,reviewer_email,response,helpfulness) FROM '/Users/yukiyamamoto/Documents/Immersive/reviewsAPI/raw-data/sample_reviews.csv' DELIMITER ',' CSV HEADER;
 
 \COPY characteristics (id, product_id, name) FROM '/Users/yukiyamamoto/Documents/Immersive/reviewsAPI/raw-data/characteristics.csv' DELIMITER ',' CSV HEADER;
 
@@ -23,3 +23,21 @@ CREATE INDEX photos_review_index ON photos(review_id);
 CREATE INDEX characteristics_product_id_index ON characteristics(product_id);
 CREATE INDEX char_reviews_review_index ON characteristic_reviews(review_id);
 CREATE INDEX char_reviews_char_index ON characteristic_reviews(characteristic_id);
+
+// duplicate the review table with the converted timestamp
+CREATE TABLE review_timestamp AS
+TABLE review;
+
+ALTER TABLE review_timestamp
+ADD COLUMN date_timestamp timestamp;
+
+UPDATE review_timestamp
+SET date_timestamp = to_timestamp(date/1000);
+
+ALTER TABLE review_timestamp
+DROP COLUMN date;
+
+ALTER TABLE review_timestamp
+RENAME COLUMN date_timestamp TO date;
+
+CREATE INDEX ts_product_id_index ON review_timestamp(product_id);

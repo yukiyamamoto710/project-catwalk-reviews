@@ -6,9 +6,9 @@ import { check, sleep } from 'k6';
 
 export const options = {
   stages: [
-    { duration: '5s', target: 5 },
-    { duration: '5s', target: 1 },
-    { duration: '5s', target: 3 },
+    { duration: '10s', target: 100 },
+    { duration: '10s', target: 1000 },
+    { duration: '20s', target: 0 },
   ],
   thresholds: {
     http_req_failed: ['rate<0.01'],
@@ -17,9 +17,9 @@ export const options = {
 };
 
 export default function () {
-  for (let id = 10000000; id <= 10000010; id++) {
-    const res = http.put(`http://localhost:3000/reviews/${id}/report`);
-    check(res, { 'status was 204': (r) => r.status === 204 });
-    sleep(1);
-  }
+  const max = 1000011;
+  const id = Math.floor(Math.random() * max) || 1;
+  const res = http.put(`http://localhost:3000/reviews/${id}/report`);
+  check(res, { 'status was 204': (r) => r.status === 204 });
+  sleep(1);
 }

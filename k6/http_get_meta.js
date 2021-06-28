@@ -6,9 +6,9 @@ import { check, sleep } from 'k6';
 
 export const options = {
   stages: [
-    { duration: '5s', target: 1000 },
-    { duration: '5s', target: 10 },
-    { duration: '5s', target: 30 },
+    { duration: '10s', target: 100 },
+    { duration: '10s', target: 1000 },
+    { duration: '20s', target: 0 },
   ],
   thresholds: {
     http_req_failed: ['rate<0.01'],
@@ -17,9 +17,9 @@ export const options = {
 };
 
 export default function () {
-  for (let id = 500000; id <= 500010; id++) {
-    const res = http.get(`http://localhost:3000/reviews/meta?product_id=${id}`);
-    check(res, { 'status was 200': (r) => r.status === 200 });
-    sleep(1);
-  }
+  const max = 1000011;
+  const id = Math.floor(Math.random() * max) || 1;
+  const res = http.get(`http://localhost:3000/reviews/meta?product_id=${id}`);
+  check(res, { 'status was 200': (r) => r.status === 200 });
+  sleep(1);
 }

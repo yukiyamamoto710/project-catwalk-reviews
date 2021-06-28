@@ -3,7 +3,7 @@ const renderReview = require('../helpers/renderReview');
 const renderList = require('../helpers/renderList');
 
 const getAllReviews = (params, callback) => {
-  let sort = 'review.id';
+  let sort = 'review_timestamp.id';
   if (params.sort === 'newest') {
     sort = 'date';
   } else if (params.sort === 'helpfulness') {
@@ -11,10 +11,10 @@ const getAllReviews = (params, callback) => {
   }
   const limit = params.count || 5;
 
-  const reviewQuery = `SELECT review.*, photos.id AS photo_id, photos.url
-      FROM review
+  const reviewQuery = `SELECT review_timestamp.*, photos.id AS photo_id, photos.url
+      FROM review_timestamp
       INNER JOIN photos
-      ON review.id = photos.review_id
+      ON review_timestamp.id = photos.review_id
       WHERE product_id = ${params.product_id}
       AND reported = false
       ORDER BY ${sort} DESC`;

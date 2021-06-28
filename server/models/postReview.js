@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const db = require('../database/index.js');
+const db = require('../database/index');
 
 const postReview = (data, callback) => {
   const {
