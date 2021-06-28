@@ -23,7 +23,3 @@ CREATE INDEX photos_review_index ON photos(review_id);
 CREATE INDEX characteristics_product_id_index ON characteristics(product_id);
 CREATE INDEX char_reviews_review_index ON characteristic_reviews(review_id);
 CREATE INDEX char_reviews_char_index ON characteristic_reviews(characteristic_id);
-
-// CREATE AN AD HOCK TABLE
-CREATE TABLE average AS
-  SELECT product_id, rating, recommend FROM review;

@@ -31,7 +31,7 @@ app.post('/reviews', (req, res) => {
     if (err) {
       res.status(404).send(err);
     } else {
-      res.sendStatus(201);
+      res.status(201);
     }
   })
 });
