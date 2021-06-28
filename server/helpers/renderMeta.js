@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 const renderMeta = (res) => {
   const results = {};
   const ratings = {};

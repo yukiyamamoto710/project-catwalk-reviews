@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const db = require('../database/index');
 
 const reportReview = (review_id, callback) => {

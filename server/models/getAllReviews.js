@@ -32,6 +32,7 @@ const getAllReviews = (params, callback) => {
         }
       });
       const combined = Object.values(results);
+      // eslint-disable-next-line no-param-reassign
       const response = renderList(params.product_id, combined, params.page = 0, limit);
       callback(null, JSON.stringify(response));
     })

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const renderReview = (review) => {
   review.review_id = review.id;
   delete review.id;

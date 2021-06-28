@@ -1,3 +1,6 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable func-names */
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
