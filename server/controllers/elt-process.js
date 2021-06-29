@@ -1,4 +1,4 @@
-\COPY review2 (id, product_id,rating,date,summary,body,recommend,reported,reviewer_name,reviewer_email,response,helpfulness) FROM '/Users/yukiyamamoto/Documents/Immersive/reviewsAPI/raw-data/sample_reviews.csv' DELIMITER ',' CSV HEADER;
+\COPY review (id, product_id,rating,date,summary,body,recommend,reported,reviewer_name,reviewer_email,response,helpfulness) FROM '/Users/yukiyamamoto/Documents/Immersive/reviewsAPI/raw-data/reviews.csv' DELIMITER ',' CSV HEADER;
 
 \COPY characteristics (id, product_id, name) FROM '/Users/yukiyamamoto/Documents/Immersive/reviewsAPI/raw-data/characteristics.csv' DELIMITER ',' CSV HEADER;
 
