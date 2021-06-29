@@ -4,7 +4,7 @@
 
 \COPY photos (id, review_id, url) FROM '/Users/yukiyamamoto/Documents/Immersive/reviewsAPI/raw-data/reviews_photos.csv' DELIMITER ',' CSV HEADER;
 
-\COPY characteristic_reviews (id, characteristic_id, review_id, value) FROM '/Users/yukiyamamoto/Documents/Immersive/reviewsAPI/raw-data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER;
+\COPY characteristic_reviews (id, characteristic_id, review_id, value) FROM\COPY characteristic_reviews (id, characteristic_id, review_id, value) FROM '/Users/yukiyamamoto/Documents/Immersive/reviewsAPI/raw-data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER;
 
 SELECT MAX(id)+1 FROM review;
 CREATE SEQUENCE review_id_sequence START 5774953;

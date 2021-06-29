@@ -1,5 +1,13 @@
-FROM postgres:alpine
+FROM node:alpine
 
-RUN mkdir -p /src/postgres
+RUN mkdir -p /src/app
 
-COPY ./server/database/postgresql.schema.sql /src/postgres
+WORKDIR /src/app
+
+COPY . /src/app
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
