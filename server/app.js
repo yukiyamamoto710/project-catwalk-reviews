@@ -62,6 +62,10 @@ app.put('/reviews/:review_id/report', (req, res) => {
   });
 });
 
+app.get('/loaderio-f6f72a08fdfd07f85990c19d964320ba.txt', (req, res) => {
+  res.send('loaderio-f6f72a08fdfd07f85990c19d964320ba');
+});
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
