@@ -62,8 +62,8 @@ app.put('/reviews/:review_id/report', (req, res) => {
   });
 });
 
-app.get('/loaderio-f6f72a08fdfd07f85990c19d964320ba.txt', (req, res) => {
-  res.send('loaderio-f6f72a08fdfd07f85990c19d964320ba');
+app.get('/loaderio-3fb9797a1a181664c1c735cfed611974.txt', (req, res) => {
+  res.send('loaderio-3fb9797a1a181664c1c735cfed611974');
 });
 
 app.listen(PORT, () => {
